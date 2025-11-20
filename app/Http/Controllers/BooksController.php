@@ -12,6 +12,18 @@ use function PHPUnit\Framework\isNull;
 
 class BooksController extends Controller
 {
+
+    /**
+     * @OA\Get(
+     *     path="/get-categories",
+     *     summary="Get category list",
+     *     tags={"Users"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success"
+     *     )
+     * )
+     */
     public function getCategories()
     {
         $categories = BooksSubject::paginate(25);
@@ -23,6 +35,17 @@ class BooksController extends Controller
         ];
     }
 
+    /**
+     * @OA\Get(
+     *     path="/get-books",
+     *     summary="Get books list",
+     *     tags={"Users"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success"
+     *     )
+     * )
+     */
     public function getBooks(Request $request)
     {
         $search = (request('search') != null) ? request('search') : "";
