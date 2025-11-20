@@ -8,7 +8,6 @@ COPY resources ./resources
 COPY public ./public
 
 RUN npm install
-RUN npm run build
 
 # Stage 2 - PHP + Apache
 FROM php:8.2-apache
