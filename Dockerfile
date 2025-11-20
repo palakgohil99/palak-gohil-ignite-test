@@ -1,21 +1,27 @@
-# Stage 1 - Build assets
-FROM node:16 as build
+# Stage 1 - Build Vue + Vite assets
+FROM node:16 AS build
 WORKDIR /app
 
 # Copy only package files first
 COPY package*.json vite.config.js ./
+RUN npm install
+
+# Copy source files
 COPY resources ./resources
 COPY public ./public
 
-RUN npm install
+# Build production assets
+RUN npm run build
 
 # Stage 2 - PHP + Apache
 FROM php:8.2-apache
 
+# Install PHP extensions
 RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip git \
-    && docker-php-ext-install pdo pdo_mysql zip
+    && docker-php-ext-install pdo pdo_mysql zip opcache
 
+# Enable Apache rewrite module
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
@@ -26,11 +32,9 @@ COPY . .
 # Copy Vite build output
 COPY --from=build /app/public/build ./public/build
 
-# Install composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
-
-RUN php artisan key:generate
 
 EXPOSE 80
 CMD ["apache2-foreground"]
