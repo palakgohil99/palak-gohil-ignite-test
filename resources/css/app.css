@@ -12,6 +12,17 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+  }
+
 body {
     font-family: 'Montserrat';
 }
+
+.header-bg {
+    background-image: url('../images/Pattern.svg');
+  }

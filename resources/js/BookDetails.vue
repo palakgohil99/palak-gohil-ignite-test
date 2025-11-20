@@ -7,7 +7,7 @@
                 <header class="flex items-center mb-4">
                     <router-link :to="{ name: 'HomePage' }"
                         class="text-3xl text-indigo-700 mr-4 cursor-pointer hover:text-indigo-900 transition-colors">
-                        &larr;
+                        <img src="../images/Back.svg" alt="">
                     </router-link>
                     <h1 class="text-2xl sm:text-3xl font-semibold text-indigo-700">
                         {{ category_name }}
@@ -15,7 +15,7 @@
                 </header>
 
                 <!-- Search Bar -->
-                <div class="mb-4">
+                <div class="mt-8">
                     <div class="relative max-w-4xl">
                         <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Scrollable Books Section (only this area scrolls) -->
-            <div id="scrollArea" ref="scrollAreaRef" class="flex-1 overflow-y-auto pr-1">
+            <div id="scrollArea" ref="scrollAreaRef" class="flex-1 overflow-y-auto pr-1 mt-8">
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5
                       gap-x-4 gap-y-10 sm:gap-y-12 bg-[#F8F7FF] w-full pb-4 px-2">
 
@@ -38,22 +38,22 @@
 
                         <!-- Book Cover -->
                         <div
-                            class="w-full aspect-[2/3] max-w-[160px] rounded-lg shadow-xl mb-2
-                          transform transition-transform duration-300 group-hover:scale-[1.02] border-2 border-gray-100">
+                            class="w-full aspect-[2/3] max-w-[160px] shadow-xl mb-2
+                          transform transition-transform duration-300 group-hover:scale-[1.02] border-2 rounded-[8px] border-gray-100">
 
                             <div :class="[book.coverClass, 'w-full h-full flex items-center justify-center']">
                                 <img :src="`https://www.gutenberg.org/cache/epub/${book.gutenberg_id}/pg${book.gutenberg_id}.cover.medium.jpg`"
-                                    class="w-full h-full object-cover block" />
+                                    class="w-full h-full object-cover block rounded-[8px]" />
                             </div>
                         </div>
 
                         <!-- Book Title -->
                         <div class="w-full max-w-[160px] px-1">
-                            <p class="text-[12px] font-semibold text-gray-800 line-clamp-2 leading-snug cursor-pointer">
+                            <p class="text-[14px] mt-2 text-left font-semibold text-gray-800 line-clamp-2 leading-snug cursor-pointer">
                                 {{ book.title }}
                             </p>
 
-                            <p class="text-[12px] text-gray-500 mt-0.5" v-for="author in book.authors" :key="author.name">
+                            <p class="text-[14px] text-left text-gray-500 mt-0.5" v-for="author in book.authors" :key="author.name">
                                 {{ author.name }}
                             </p>
                         </div>
@@ -278,7 +278,7 @@ onBeforeUnmount(() => {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     height: 40px;
-    font-size: 16px;
+    font-size: 18px;
     color: #374151;
     background: #f0f0f6;
     border: 1px solid #e5e7eb;
@@ -286,6 +286,7 @@ onBeforeUnmount(() => {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     outline: none;
     transition: all 0.2s ease;
+    font-weight: bold;
 }
 
 .search-input:focus {
