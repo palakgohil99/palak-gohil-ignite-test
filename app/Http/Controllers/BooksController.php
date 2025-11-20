@@ -9,7 +9,6 @@ use App\Models\BooksSubject;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
-
 class BooksController extends Controller
 {
 
@@ -52,9 +51,9 @@ class BooksController extends Controller
         $books = BooksBook::select('id', 'title', 'download_count', 'media_type', 'gutenberg_id')
                     ->with(['authors', 'languages', 'subjects', 'bookshelves', 'formats'])
                     ->when(request('id'), function ($q, $id) {
-                        $q->where('id', $id);
+                        $q->where('gutenberg_id', $id);
                     })
-                    ->when(request('category_id'), function($q, $categoryId) {
+                    ->when(request('category'), function($q, $categoryId) {
                         $q->whereHas('subjects', function ($sub) use ($categoryId) {
                             $sub->where('subject_id', $categoryId);
                         });

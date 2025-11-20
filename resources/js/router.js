@@ -13,7 +13,14 @@ const routes = [
         name: 'BookDetails',
         component: BookDetails,
         props: true // allows category_id to be accessed as prop
-    }
+    },
+    {
+        path: '/swagger',
+        name: 'SwaggerRedirect',
+        beforeEnter() {
+            window.location.href = '/api/documentation' // redirect to Laravel Swagger
+        },
+    },
 ]
 
 const router = createRouter({
